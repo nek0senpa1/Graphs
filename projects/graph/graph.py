@@ -16,14 +16,14 @@ class Graph:
         """
         Add a vertex to the graph.
         """
-        self.vertices[vertex] = vertex
+        self.vertices[vertex] = set()
         
 
     def add_edge(self, v1, v2):
         """
         Add a directed edge to the graph.
         """
-        self.vertices[v1].add[v2]
+        self.vertices[v1].add(v2)
 
         
     def bft(self, starting_vertex):
@@ -75,16 +75,16 @@ if __name__ == '__main__':
     graph.add_vertex(5)
     graph.add_vertex(6)
     graph.add_vertex(7)
-    # graph.add_edge(5, 3)
-    # graph.add_edge(6, 3)
-    # graph.add_edge(7, 1)
-    # graph.add_edge(4, 7)
-    # graph.add_edge(1, 2)
-    # graph.add_edge(7, 6)
-    # graph.add_edge(2, 4)
-    # graph.add_edge(3, 5)
-    # graph.add_edge(2, 3)
-    # graph.add_edge(4, 6)
+    graph.add_edge(5, 3)
+    graph.add_edge(6, 3)
+    graph.add_edge(7, 1)
+    graph.add_edge(4, 7)
+    graph.add_edge(1, 2)
+    graph.add_edge(7, 6)
+    graph.add_edge(2, 4)
+    graph.add_edge(3, 5)
+    graph.add_edge(2, 3)
+    graph.add_edge(4, 6)
 
     '''
     Should print:
