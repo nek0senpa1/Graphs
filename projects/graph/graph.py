@@ -66,10 +66,11 @@ class Graph:
             if path not in visited:
                 
                 visited.add(path)
-                print('visited',visited)
+                # print('visited',visited)
+                print(path)
 
                 for nexty in self.vertices[path]:
-                    print('next', nexty)
+                    # print('next', nexty)
                     if nexty not in visited:
                         stack.push(nexty)
 
@@ -95,23 +96,25 @@ class Graph:
         """
 
         q = Queue()
-        q.enqueue(starting_vertex)
+        q.enqueue([starting_vertex])
         visited = set()
-        
+
         while q.size() > 0:
             path = q.dequeue()
-            
+            vertex = path[-1]
             print('BFS starting on vertex', path)
+            
 
-            if path not in visited:
-                visited.add(path)
+            if vertex not in visited:
+                visited.add(vertex)
 
-                if path == destination_vertex:
-                    return visited
+                if vertex == destination_vertex:
+                    return path
 
-                for nexto in self.vertices[path]:
-                    q.enqueue(nexto)
-                
+                for nexto in self.vertices[vertex]:
+                    pathy = path.copy()
+                    pathy.append(nexto)
+                    q.enqueue(pathy)
 
 
         
@@ -124,7 +127,7 @@ class Graph:
         stack = Stack()
         stack.push(starting_vertex)
         visited = set()
-        
+        rundown = []
         while stack.size() > 0:
             path = stack.pop()
             
@@ -132,9 +135,9 @@ class Graph:
 
             if path not in visited:
                 visited.add(path)
-
+                rundown.append(path)
                 if path == destination_vertex:
-                    return visited
+                    return rundown
 
                 for nexto in self.vertices[path]:
                     stack.push(nexto)
