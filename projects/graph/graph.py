@@ -109,6 +109,7 @@ class Graph:
                 visited.add(vertex)
 
                 if vertex == destination_vertex:
+                    print(self.vertices)
                     return path
 
                 for nexto in self.vertices[vertex]:
