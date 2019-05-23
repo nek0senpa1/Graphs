@@ -24,7 +24,6 @@ player = Player("Name", world.startingRoom)
 
 traversalPath = []
 
-# room = Room()
 
 # TRAVERSAL TEST
 visited_rooms = set()
@@ -44,41 +43,75 @@ else:
     print(f"{len(roomGraph) - len(visited_rooms)} unvisited rooms")
 
 
+
+
+
+class Stack():
+    def __init__(self):
+        self.stack = []
+    def push(self, value):
+        self.stack.append(value)
+    def pop(self):
+        if self.size() > 0:
+            return self.stack.pop()
+        else:
+            return None
+    def size(self):
+        return len(self.stack)
+
+
 class AdventureTime:
 
-    def __init__(self, world):
+    def __init__(self, id = None):
+        self.id = id
+
+    def populate(self, world):
         self.roomsTracker = {0 :{'n': '?', 's': '?', 'w': '?', 'e': '?'}}
         self.maxRooms = len(world)
-        self.exots = player.currentRoom.getExits()
         
         print('Max Rooms', self.maxRooms)
 
         # for rooms in world:
         #     roomsTracker[rooms] = {'n': '?', 's': '?', 'w': '?', 'e': '?'}
-        
-        print('Rooms Log', self.roomsTracker)
 
         print(player.currentRoom)
-        print(self.exots)
         
         # player.currentRoom.id()
         # player.currentRoom.getExits()
 
+    def traverseShit(self, start_at):
+        
+        stack = Stack()
+        stack.push(start_at)
+        visited = set()
+        
+
+        while stack.size() > 0:
+            print('Rooms Log', self.roomsTracker)
+
+            self.exots = player.currentRoom.getExits()
+            print(self.exots)
+            pathy = stack.pop()
+
+            if 'n' in self.exots:
+                print('there is an North')
+                traversalPath.append('n')
+                player.travel('n')
+
+                print('traversalPath', traversalPath)
+                
+
+
+
+
+
+
+
+adventure_time = AdventureTime()
     
-        if 'n' in self.exots:
-            print('there is an North')
+adventure_time.populate(roomGraph)
 
-
-
-
-
-
-
-
-    
-AdventureTime(roomGraph)
-
-# AdventureTime.traverseShit(12)
+adventure_time.traverseShit(0)
 
 
 
