@@ -79,15 +79,23 @@ class AdventureTime:
         # player.currentRoom.id()
         # player.currentRoom.getExits()
 
-    def traverseShit(self, start_at):
+    def traverseShit(self, start_at, came_from='?'):
         
         stack = Stack()
         stack.push(start_at)
-        visited = set()
-        
 
         while stack.size() > 0:
+
             print('Rooms Log', self.roomsTracker)
+
+            room = player.currentRoom.id
+
+            if room in visited_rooms:
+                print('already visited here...')
+
+            visited_rooms.add(room)
+
+            print('room num', room)
 
             self.exots = player.currentRoom.getExits()
             print(self.exots)
@@ -99,6 +107,9 @@ class AdventureTime:
                 player.travel('n')
 
                 print('traversalPath', traversalPath)
+                print('visited', visited_rooms)
+
+
                 
 
 
