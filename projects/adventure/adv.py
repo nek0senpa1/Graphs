@@ -27,7 +27,7 @@ visited_rooms = set()
 
 player.currentRoom = world.startingRoom
 
-# visited_rooms.add(player.currentRoom)
+visited_rooms.add(player.currentRoom)
 
 
 class Stack():
@@ -48,6 +48,7 @@ class AdventureTime:
 
     def __init__(self, id = None):
         self.id = id
+        self.visited = set()
 
     def populate(self, world):
         self.roomsTracker = {0 :{'n': '?', 's': '?', 'w': '?', 'e': '?'}}
@@ -77,8 +78,8 @@ class AdventureTime:
             # if room in visited_rooms:
             #     print('already visited here...')
 
-            visited_rooms.add(room)
-            print('visited', visited_rooms)
+            self.visited.add(room)
+            print('visited', self.visited)
 
             # print('room num', room)
 
@@ -95,24 +96,11 @@ class AdventureTime:
                 stack.push(player.currentRoom.id)
 
         print('final traversal path:', traversalPath)
-        print('final visited rooms:', visited_rooms)
+        print('final visited rooms:', self.visited)
         print(len(roomGraph))
-        print(len(visited_rooms))    
+        print(len(self.visited))    
 
-        # TRAVERSAL TEST
-
-        for move in traversalPath:
-            player.travel(move)
-            visited_rooms.add(player.currentRoom)
-
-        if len(visited_rooms) == len(roomGraph):
-            print(f"TESTS PASSED: {len(traversalPath)} moves, {len(visited_rooms)} rooms visited")
-        else:
-            print("TESTS FAILED: INCOMPLETE TRAVERSAL")
-            print(f"{len(roomGraph) - len(visited_rooms)} unvisited rooms")
-
-
-
+        
 
 adventure_time = AdventureTime()
     
@@ -122,7 +110,21 @@ adventure_time.traverseShit(0)
 
 
 
+# TRAVERSAL TEST
+print('TEST BEGINS !!!')
+print('---------------')
+print('The Traversal Path:', traversalPath)
 
+
+for move in traversalPath:
+    player.travel(move)
+    visited_rooms.add(player.currentRoom)
+
+if len(visited_rooms) == len(roomGraph):
+    print(f"TESTS PASSED: {len(traversalPath)} moves, {len(visited_rooms)} rooms visited")
+else:
+    print("TESTS FAILED: INCOMPLETE TRAVERSAL")
+    print(f"{len(roomGraph) - len(visited_rooms)} unvisited rooms")
 
 
 #######
