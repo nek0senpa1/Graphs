@@ -24,7 +24,7 @@ player = Player("Name", world.startingRoom)
 
 traversalPath = []
 
-
+# room = Room()
 
 # TRAVERSAL TEST
 visited_rooms = set()
@@ -44,26 +44,41 @@ else:
     print(f"{len(roomGraph) - len(visited_rooms)} unvisited rooms")
 
 
-def adventure_time(world):
-    roomsTracker = {0 :{'n': '?', 's': '?', 'w': '?', 'e': '?'}}
-    maxRooms = len(world)
+class AdventureTime:
+
+    def __init__(self, world):
+        self.roomsTracker = {0 :{'n': '?', 's': '?', 'w': '?', 'e': '?'}}
+        self.maxRooms = len(world)
+        self.exots = player.currentRoom.getExits()
+        
+        print('Max Rooms', self.maxRooms)
+
+        # for rooms in world:
+        #     roomsTracker[rooms] = {'n': '?', 's': '?', 'w': '?', 'e': '?'}
+        
+        print('Rooms Log', self.roomsTracker)
+
+        print(player.currentRoom)
+        print(self.exots)
+        
+        # player.currentRoom.id()
+        # player.currentRoom.getExits()
+
     
-    print('Max Rooms', maxRooms)
+        if 'n' in self.exots:
+            print('there is an North')
 
-    # for rooms in world:
-    #     roomsTracker[rooms] = {'n': '?', 's': '?', 'w': '?', 'e': '?'}
-    
-    print('Rooms Log', roomsTracker)
 
-    print(player.currentRoom)
-    
-    player.currentRoom.id()
-    # player.currentRoom.getExits()
+
+
+
 
 
 
     
-adventure_time(roomGraph)
+AdventureTime(roomGraph)
+
+# AdventureTime.traverseShit(12)
 
 
 
