@@ -43,6 +43,18 @@ class Stack():
     def size(self):
         return len(self.stack)
 
+class Queue():
+    def __init__(self):
+        self.queue = []
+    def enqueue(self, value):
+        self.queue.append(value)
+    def dequeue(self):
+        if self.size() > 0:
+            return self.queue.pop(0)
+        else:
+            return None
+    def size(self):
+        return len(self.queue)
 
 class AdventureTime:
 
@@ -63,6 +75,50 @@ class AdventureTime:
         
         # player.currentRoom.id()
         # player.currentRoom.getExits()
+
+    
+
+    def traverseMoarShit(self, start_room, from_room, already_done):
+
+        q = Queue()
+        q.enque(start_room)
+        visito = set()
+
+        while q.size() > 0:
+
+            room = player.currentRoom.id
+            if room not in self.roomsTracker:
+                self.roomsTracker[room] = {'n': '?', 's': '?', 'w': '?', 'e': '?'}
+            
+            if room not in self.visited:
+                self.visited.add(room)
+                print('visited', self.visited)
+
+            path = q.dequeue()
+
+            nexty = None
+
+            for moves in self.roomsTracker[room]:
+                if self.roomsTracker[room][moves] == '?':
+                    nexty = moves
+                    print('next move:', nexty)
+
+                    if nexty is not None:
+                        self.roomsTracker.append(nexty)
+                        player.travel(nexty)
+                        nexty = room
+
+                        if nexty not in self.roomsTracker:
+                            self.roomsTracker[nexty] = {'n': '?', 's': '?', 'w': '?', 'e': '?'}
+
+                    self.roomsTracker[room][nexty] = nexty
+                    self.roomsTracker[nexty][]
+
+
+
+            
+
+
 
     def traverseShit(self, start_at, came_from='?'):
         
@@ -105,6 +161,10 @@ class AdventureTime:
                 print('pathy... :', pathy)
                 stack.push(player.currentRoom.id)
                 came_from=pathy
+
+            else:
+                self.roomsTracker[room]['n'] = None
+
                 
                 
 
