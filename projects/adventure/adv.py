@@ -76,12 +76,22 @@ class AdventureTime:
         # player.currentRoom.id()
         # player.currentRoom.getExits()
 
-    
+    def oppy(self, widget):
+        if widget == 'n':
+            return 's'
+        elif widget == 's':
+            return 'n'
+        elif widget == 'e':
+            return 'w'
+        elif widget == 'w':
+            return 'e'
+        else:
+            return None
 
-    def traverseMoarShit(self, start_room, from_room, already_done):
+    def traverseMoarShit(self, start_room, from_room=None):
 
         q = Queue()
-        q.enque(start_room)
+        q.enqueue(start_room)
         visito = set()
 
         while q.size() > 0:
@@ -104,15 +114,17 @@ class AdventureTime:
                     print('next move:', nexty)
 
                     if nexty is not None:
-                        self.roomsTracker.append(nexty)
+                        self.visited.add(nexty)
                         player.travel(nexty)
                         nexty = room
 
-                        if nexty not in self.roomsTracker:
-                            self.roomsTracker[nexty] = {'n': '?', 's': '?', 'w': '?', 'e': '?'}
+                        if room not in self.roomsTracker:
+                            self.roomsTracker[room] = {'n': '?', 's': '?', 'w': '?', 'e': '?'}
 
                     self.roomsTracker[room][nexty] = nexty
-                    self.roomsTracker[nexty][]
+                    self.roomsTracker[nexty][self.oppy(nexty)] = room
+
+                    room = nexty
 
 
 
@@ -164,6 +176,7 @@ class AdventureTime:
 
             else:
                 self.roomsTracker[room]['n'] = None
+                self.traverseMoarShit(player.currentRoom.id)
 
                 
                 
