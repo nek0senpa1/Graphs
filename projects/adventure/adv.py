@@ -86,7 +86,10 @@ class AdventureTime:
 
             # self.roomsTracker[room]['s'] = came_from
             # self.roomsTracker[room['s']] = came_from
-            self.roomsTracker[room].['s'] = came_from
+            self.roomsTracker[room]['s'] = came_from
+
+            if came_from != '?':
+                self.roomsTracker[came_from]['n'] = room
 
             self.exots = player.currentRoom.getExits()
             print(self.exots)
@@ -98,22 +101,19 @@ class AdventureTime:
                 print('traversalPath', traversalPath)
                 player.travel('n')
                 print(player.currentRoom)
-                stack.push(player.currentRoom.id, pathy)
+                print('room id:', player.currentRoom.id)
+                print('pathy... :', pathy)
+                stack.push(player.currentRoom.id)
+                came_from=pathy
+                
+                
 
-            else:
-                print('need to move to BFT')
+            
 
 
 
 
-        print('-----------------------------------')
-        print('TEST STUFF')
-        print('final room log:', self.roomsTracker)
-        print('final traversal path:', traversalPath)
-        print('final traversal length:', len(traversalPath))
-        print('final visited rooms:', self.visited)
-        print('number of rooms:', len(roomGraph))
-        print('number of rooms visited:', len(self.visited))    
+                
 
         
 
@@ -122,6 +122,16 @@ adventure_time = AdventureTime()
 adventure_time.populate(roomGraph)
 
 adventure_time.traverseShit(0)
+
+
+print('-----------------------------------')
+print('TEST STUFF')
+print('final room log:', adventure_time.roomsTracker)
+print('final traversal path:', traversalPath)
+print('final traversal length:', len(traversalPath))
+print('final visited rooms:', adventure_time.visited)
+print('number of rooms:', len(roomGraph))
+print('number of rooms visited:', len(adventure_time.visited))
 
 
 # bibi = player.currentRoom.id
