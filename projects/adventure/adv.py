@@ -110,21 +110,7 @@ class AdventureTime:
 
             for moves in self.roomsTracker[room]:
                 if self.roomsTracker[room][moves] == '?':
-                    nexty = moves
-                    print('next move:', nexty)
-
-                    if nexty is not None:
-                        self.visited.add(nexty)
-                        player.travel(nexty)
-                        nexty = room
-
-                        if room not in self.roomsTracker:
-                            self.roomsTracker[room] = {'n': '?', 's': '?', 'w': '?', 'e': '?'}
-
-                    self.roomsTracker[room][nexty] = nexty
-                    self.roomsTracker[nexty][self.oppy(nexty)] = room
-
-                    room = nexty
+                    print('should move', moves, 'next...')
 
 
 
