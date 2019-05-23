@@ -96,6 +96,8 @@ class AdventureTime:
 
         while q.size() > 0:
 
+
+
             room = player.currentRoom.id
             if room not in self.roomsTracker:
                 self.roomsTracker[room] = {'n': '?', 's': '?', 'w': '?', 'e': '?'}
@@ -110,7 +112,15 @@ class AdventureTime:
 
             for moves in self.roomsTracker[room]:
                 if self.roomsTracker[room][moves] == '?':
+                    new_room = player.currentRoom.id
                     print('should move', moves, 'next...')
+                    traversalPath.append(moves)
+                    player.travel(moves)
+                    
+                    from_room = new_room
+
+                    q.enqueue(player.currentRoom.id)
+
 
 
 
