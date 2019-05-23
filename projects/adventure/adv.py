@@ -84,7 +84,9 @@ class AdventureTime:
             if room not in self.roomsTracker:
                 self.roomsTracker[room] = {'n': '?', 's': '?', 'w': '?', 'e': '?'}
 
-            self.roomsTracker[room['s']] = came_from
+            # self.roomsTracker[room]['s'] = came_from
+            # self.roomsTracker[room['s']] = came_from
+            self.roomsTracker[room].['s'] = came_from
 
             self.exots = player.currentRoom.getExits()
             print(self.exots)
