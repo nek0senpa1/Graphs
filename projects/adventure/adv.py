@@ -99,7 +99,17 @@ class AdventureTime:
         print(len(roomGraph))
         print(len(visited_rooms))    
 
+        # TRAVERSAL TEST
 
+        for move in traversalPath:
+            player.travel(move)
+            visited_rooms.add(player.currentRoom)
+
+        if len(visited_rooms) == len(roomGraph):
+            print(f"TESTS PASSED: {len(traversalPath)} moves, {len(visited_rooms)} rooms visited")
+        else:
+            print("TESTS FAILED: INCOMPLETE TRAVERSAL")
+            print(f"{len(roomGraph) - len(visited_rooms)} unvisited rooms")
 
 
 
@@ -112,17 +122,7 @@ adventure_time.traverseShit(0)
 
 
 
-# TRAVERSAL TEST
 
-for move in traversalPath:
-    player.travel(move)
-    visited_rooms.add(player.currentRoom)
-
-if len(visited_rooms) == len(roomGraph):
-    print(f"TESTS PASSED: {len(traversalPath)} moves, {len(visited_rooms)} rooms visited")
-else:
-    print("TESTS FAILED: INCOMPLETE TRAVERSAL")
-    print(f"{len(roomGraph) - len(visited_rooms)} unvisited rooms")
 
 
 #######
