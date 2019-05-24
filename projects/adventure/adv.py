@@ -78,11 +78,11 @@ while len(roomTracker) < len(roomGraph):
 
     for wayos in roomTracker[place]:
         if roomTracker[place][wayos] == '?':
-            print('new way going...')
+            print('new way going...', wayos)
             room_way = wayos
 
             if room_way is not None:
-                print('new way added...')
+                print('new way added...', room_way)
                 traversalPath.append(room_way)
                 player.travel(room_way)
                 newway = player.currentRoom.id
@@ -93,13 +93,21 @@ while len(roomTracker) < len(roomGraph):
                         i: '?' for i in player.currentRoom.getExits()
                         }
 
+            print('newway:',newway)
+            print('place:',place)
+
+
             roomTracker[place][room_way] = newway
             
-            roomTracker[newway][oppy(wayos)] = place
+            roomTracker[newway][oppy(room_way)] = place
+            # error tells me this makes it all stop...
 
-            place = newway
+            # place = newway
 
-        
+
+print(roomTracker)
+
+# traverseBFSway(roomGraph, player.currentRoom.id)
         
 
 
