@@ -77,8 +77,9 @@ while len(roomTracker) < len(roomGraph):
 
     room_way = None
 
-    for wayos in roomTracker[player.currentRoom.id]:
+    for wayos in roomTracker[place]:
         print('now searching for ways/exits in:', place, 'on exit', wayos)
+        
         if roomTracker[place][wayos] == '?':
             print('new way going...', wayos)
             room_way = wayos
@@ -105,18 +106,18 @@ while len(roomTracker) < len(roomGraph):
 
             place = newway
             print(roomTracker)
+            print('travel path so far:', traversalPath)
             print('-------------------')
 
 
                 #with this it goes... north then west...then dies on line 80
                 #but there is no damn e in that wayos...
                 
-
-        # else:
-        #     print('it stopped')
+        elif roomTracker[place][wayos] == int:
+            print('well, we can go somewhere else... i hope')
         
         # blob = traverseBFSway(roomTracker, place)        
-            
+          
 
         # runshit = traverseBFSway(roomTracker)
 
