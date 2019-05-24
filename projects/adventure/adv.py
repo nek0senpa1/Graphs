@@ -63,7 +63,7 @@ class AdventureTime:
         self.visited = set()
 
     def populate(self, world):
-        self.roomsTracker = {0 :{'n': '?', 's': '?', 'w': '?', 'e': '?'}}
+        self.roomsTracker = {}
         self.maxRooms = len(world)
         
         print('Max Rooms', self.maxRooms)
@@ -102,50 +102,34 @@ class AdventureTime:
 
 
     def traverseShit(self, start_at, came_from='?'):
+
+        print('Rooms Log', self.roomsTracker)
         
-        stack = Stack()
-        stack.push(start_at)
+        room = player.currentRoom.id
+        self.visited.add(room)
+        print('visited', self.visited)
 
-        while stack.size() > 0:
-
-            print('Rooms Log', self.roomsTracker)
-
-            room = player.currentRoom.id
-
-            # if room in visited_rooms:
-            #     print('already visited here...')
-
-            self.visited.add(room)
-            print('visited', self.visited)
+        while len(self.visited) < self.maxRooms:
+            self.exots = player.currentRoom.getExits()
+            # print(self.exots)
 
             if room not in self.roomsTracker:
-                self.roomsTracker[room] = {'n': '?', 's': '?', 'w': '?', 'e': '?'}
+                self.roomsTracker[room] = {way: '?' for way in self.exots}
 
-            # self.roomsTracker[room]['s'] = came_from
-            # self.roomsTracker[room['s']] = came_from
-            self.roomsTracker[room]['s'] = came_from
-
-            if came_from != '?':
-                self.roomsTracker[came_from]['n'] = room
-
-            self.exots = player.currentRoom.getExits()
-            print(self.exots)
-            pathy = stack.pop()
+            # print('Rooms Log', self.roomsTracker)
 
             if 'n' in self.exots:
-                print('there is an North')
-                traversalPath.append('n')
-                print('traversalPath', traversalPath)
-                player.travel('n')
-                print(player.currentRoom)
-                print('room id:', player.currentRoom.id)
-                print('pathy... :', pathy)
-                stack.push(player.currentRoom.id)
-                came_from=pathy
+                if 'n' == '?':
+                    print('we moving north...')
+                    player.travel('n')
+                    traversalPath.append('n')
+                    self.traverseMoarShit(player.currentRoom.id)
 
-            else:
-                self.roomsTracker[room]['n'] = None
-                print(self.traverseMoarShit(player.currentRoom.id))
+
+
+
+
+               
                 
 
         
@@ -201,3 +185,47 @@ print('number of rooms visited:', len(adventure_time.visited))
 #         print("I did not understand that command.")
 
 
+
+        # stack = Stack()
+        # stack.push(start_at)
+
+        # while stack.size() > 0:
+
+        #     print('Rooms Log', self.roomsTracker)
+
+        #     room = player.currentRoom.id
+
+        #     # if room in visited_rooms:
+        #     #     print('already visited here...')
+
+        #     self.visited.add(room)
+        #     print('visited', self.visited)
+
+        #     if room not in self.roomsTracker:
+        #         self.roomsTracker[room] = {'n': '?', 's': '?', 'w': '?', 'e': '?'}
+
+        #     # self.roomsTracker[room]['s'] = came_from
+        #     # self.roomsTracker[room['s']] = came_from
+        #     self.roomsTracker[room]['s'] = came_from
+
+        #     if came_from != '?':
+        #         self.roomsTracker[came_from]['n'] = room
+
+        #     self.exots = player.currentRoom.getExits()
+        #     print(self.exots)
+        #     pathy = stack.pop()
+
+        #     if 'n' in self.exots:
+        #         print('there is an North')
+        #         traversalPath.append('n')
+        #         print('traversalPath', traversalPath)
+        #         player.travel('n')
+        #         print(player.currentRoom)
+        #         print('room id:', player.currentRoom.id)
+        #         print('pathy... :', pathy)
+        #         stack.push(player.currentRoom.id)
+        #         came_from=pathy
+
+        #     else:
+        #         self.roomsTracker[room]['n'] = None
+        #         print(self.traverseMoarShit(player.currentRoom.id))
