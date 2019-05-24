@@ -85,29 +85,28 @@ while len(roomTracker) < len(roomGraph):
         if roomTracker[place][wayos] == '?':
             print('new way going...', wayos)
             room_way = wayos
+        
+            print('new way added...', room_way)
+            traversalPath.append(room_way)
+            player.travel(room_way)
+            newway = player.currentRoom.id
 
-            if room_way is not None:
-                print('new way added...', room_way)
-                traversalPath.append(room_way)
-                player.travel(room_way)
-                newway = player.currentRoom.id
+            if newway not in roomTracker:
+                print('new way is...', newway)
+                roomTracker[newway] = {
+                    i: '?' for i in player.currentRoom.getExits()
+                    }
+                print('runcount',runcount)
 
-                if newway not in roomTracker:
-                    print('new way is...', newway)
-                    roomTracker[newway] = {
-                        i: '?' for i in player.currentRoom.getExits()
-                        }
-                    print('runcount',runcount)
+                roomTracker[place][room_way] = newway
+                print(roomTracker)
+                roomTracker[newway][oppy(room_way)] = place
+                # this runs north then loops til stops
 
-            roomTracker[place][room_way] = newway
-            print(roomTracker)
-            roomTracker[newway][oppy(room_way)] = place
-            # this runs north then loops til stops
-
-            place = newway
-            print(roomTracker)
-            print('travel path so far:', traversalPath)
-            print('-------------------')
+                place = newway
+                print(roomTracker)
+                print('travel path so far:', traversalPath)
+                print('-------------------')
 
 
                 #with this it goes... north then west...then dies on line 80
