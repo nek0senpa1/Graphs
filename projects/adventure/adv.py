@@ -58,9 +58,28 @@ def traverseBFSway(rooms, start):
 
             for moreexits in rooms[roomy]:
                 nextroom = rooms[roomy][moreexits]
-                pathy = path.copy()
-                pathy.append(nexto)
-                q.enqueue(pathy) 
+                pathy = path.copy() ##
+                pathy.append(nextroom)
+                hold.enqueue(pathy) 
+
+while len(roomTracker) < len(roomGraph):
+    place = player.currentRoom.id
+
+    if place not in roomTracker:
+        print(roomTracker)
+        roomTracker[place] = {way: '?' for way in player.currentRoom.getExits()}
+
+
+
+
+
+
+
+
+
+
+
+
 
 # TRAVERSAL TEST
 visited_rooms = set()
