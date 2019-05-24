@@ -24,7 +24,7 @@ player = Player("Name", world.startingRoom)
 
 traversalPath = []
 
-roomTracker = set()
+roomTracker = {}
 
 
 def oppy(widget):
@@ -62,12 +62,31 @@ def traverseBFSway(rooms, start):
                 pathy.append(nextroom)
                 hold.enqueue(pathy) 
 
+
 while len(roomTracker) < len(roomGraph):
     place = player.currentRoom.id
 
+    room_way = None
+
     if place not in roomTracker:
         print(roomTracker)
-        roomTracker[place] = {way: '?' for way in player.currentRoom.getExits()}
+        # roomTracker.add(place)
+        # roomTracker.add(place) = {way: '?' for way in player.currentRoom.getExits()}
+        roomTracker[place] = {i: '?' for i in player.currentRoom.getExits()}
+
+    for wayos in roomTracker[place]:
+        if roomTracker[place][wayos] == '?':
+            print('new way going...')
+            room_way = wayos
+
+            if room_way is not None:
+                print('new way added...')
+                traversalPath.append(room_way)
+                player.travel(room_way)
+                newway = player.currentRoom.id
+
+        break
+        
 
 
 
