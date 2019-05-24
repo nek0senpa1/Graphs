@@ -93,18 +93,21 @@ while len(roomTracker) < len(roomGraph):
                         i: '?' for i in player.currentRoom.getExits()
                         }
 
-            print('newway:',newway)
-            print('place:',place)
+                print('newway:',newway)
+                print('place:',place)
 
 
-            roomTracker[place][room_way] = newway
-            print(roomTracker)
-            roomTracker[newway][oppy(room_way)] = place
-            # this runs north then loops til stops
+                roomTracker[place][room_way] = newway
+                print(roomTracker)
+                roomTracker[newway][oppy(room_way)] = place
+                # this runs north then loops til stops
 
-            place = newway
-            #with this it goes... north then west...then dies on line 80
-            #but there is no damn e in that wayos...
+                place = newway
+                #with this it goes... north then west...then dies on line 80
+                #but there is no damn e in that wayos...
+
+        else:
+            print('it stopped')
             
             
 
