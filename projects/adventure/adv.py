@@ -68,13 +68,12 @@ def traverseBFSway(rooms, start):
 while len(roomTracker) < len(roomGraph):
     place = player.currentRoom.id
 
-    room_way = None
-
+    
     if place not in roomTracker:
         print(roomTracker)
-        # roomTracker.add(place)
-        # roomTracker.add(place) = {way: '?' for way in player.currentRoom.getExits()}
         roomTracker[place] = {i: '?' for i in player.currentRoom.getExits()}
+
+    room_way = None
 
     for wayos in roomTracker[place]:
         if roomTracker[place][wayos] == '?':
@@ -94,8 +93,7 @@ while len(roomTracker) < len(roomGraph):
                         }
 
                 print('newway:',newway)
-                print('place:',place)
-
+                # print('place:',place)
 
                 roomTracker[place][room_way] = newway
                 print(roomTracker)
@@ -105,10 +103,11 @@ while len(roomTracker) < len(roomGraph):
                 place = newway
                 #with this it goes... north then west...then dies on line 80
                 #but there is no damn e in that wayos...
+                break
 
-        else:
-            print('it stopped')
-            
+        # else:
+        #     print('it stopped')
+        blob = traverseBFSway(roomTracker, place)        
             
 
         # runshit = traverseBFSway(roomTracker)
