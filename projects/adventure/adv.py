@@ -63,6 +63,8 @@ def traverseBFSway(rooms, start):
                 hold.enqueue(pathy) 
 
 
+
+
 while len(roomTracker) < len(roomGraph):
     place = player.currentRoom.id
 
@@ -85,7 +87,19 @@ while len(roomTracker) < len(roomGraph):
                 player.travel(room_way)
                 newway = player.currentRoom.id
 
-        break
+                if newway not in roomTracker:
+                    print('new way is...', newway)
+                    roomTracker[place] = {
+                        i: '?' for i in player.currentRoom.getExits()
+                        }
+
+            roomTracker[place][room_way] = newway
+            
+            roomTracker[newway][oppy(wayos)] = place
+
+            place = newway
+
+        
         
 
 
