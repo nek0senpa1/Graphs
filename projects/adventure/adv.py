@@ -97,14 +97,22 @@ class AdventureTime:
             path = q.dequeue()
             room = path[-1]
 
-            if room not in visited:
-                visited.add(room)
+            if room not in self.visited:
+                self.visited.add(room)
 
             for nexto in self.roomsTracker[room]:
                 if self.roomsTracker[room][nexto] == '?':
                     return nexto
                 else:
-                    return nexto
+                    player.travel(nexto)
+                    self.traverseMoarShit(start_room)
+
+
+            for something in self.roomsTracker[room]:
+                next_place = self.roomsTracker[room][something]
+                junkpath = path + [next_place]
+                q.enqueue(junkpath)
+                print(self.visited)
 
 
     def traverseShit(self, start_at, came_from='?'):
