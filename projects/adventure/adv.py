@@ -89,7 +89,7 @@ while len(roomTracker) < len(roomGraph):
 
                 if newway not in roomTracker:
                     print('new way is...', newway)
-                    roomTracker[place] = {
+                    roomTracker[newway] = {
                         i: '?' for i in player.currentRoom.getExits()
                         }
 
