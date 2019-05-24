@@ -100,10 +100,15 @@ while len(roomTracker) < len(roomGraph):
             roomTracker[place][room_way] = newway
             print(roomTracker)
             roomTracker[newway][oppy(room_way)] = place
-            # error tells me this makes it all stop...
+            # this runs north then loops til stops
 
-            # place = newway
-            break
+            place = newway
+            #with this it goes... north then west...then dies on line 80
+            #but there is no damn e in that wayos...
+            
+            
+
+        # runshit = traverseBFSway(roomTracker)
 
 
 print(roomTracker)
