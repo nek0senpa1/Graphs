@@ -62,6 +62,7 @@ def traverseBFSway(rooms, start):
                 pathy.append(nextroom)
                 hold.append(pathy) 
 
+        return visited
 
 
 
@@ -70,12 +71,14 @@ while len(roomTracker) < len(roomGraph):
 
     
     if place not in roomTracker:
-        print(roomTracker)
         roomTracker[place] = {i: '?' for i in player.currentRoom.getExits()}
+        
+    print('top tracker', roomTracker)
 
     room_way = None
 
-    for wayos in roomTracker[place]:
+    for wayos in roomTracker[player.currentRoom.id]:
+        print('now searching for ways/exits in:', place, 'on exit', wayos)
         if roomTracker[place][wayos] == '?':
             print('new way going...', wayos)
             room_way = wayos
@@ -92,22 +95,27 @@ while len(roomTracker) < len(roomGraph):
                         i: '?' for i in player.currentRoom.getExits()
                         }
 
-                print('newway:',newway)
-                # print('place:',place)
+            print('newway:',newway)
+            # print('place:',place)
 
-                roomTracker[place][room_way] = newway
-                print(roomTracker)
-                roomTracker[newway][oppy(room_way)] = place
-                # this runs north then loops til stops
+            roomTracker[place][room_way] = newway
+            print(roomTracker)
+            roomTracker[newway][oppy(room_way)] = place
+            # this runs north then loops til stops
 
-                place = newway
+            place = newway
+            print(roomTracker)
+            print('-------------------')
+
+
                 #with this it goes... north then west...then dies on line 80
                 #but there is no damn e in that wayos...
-                break
+                
 
         # else:
         #     print('it stopped')
-        blob = traverseBFSway(roomTracker, place)        
+        
+        # blob = traverseBFSway(roomTracker, place)        
             
 
         # runshit = traverseBFSway(roomTracker)
@@ -115,7 +123,7 @@ while len(roomTracker) < len(roomGraph):
 
 print(roomTracker)
 
-# traverseBFSway(roomGraph, player.currentRoom.id)
+# print(traverseBFSway(roomGraph, 0))
         
 
 
