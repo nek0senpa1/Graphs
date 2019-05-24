@@ -24,7 +24,43 @@ player = Player("Name", world.startingRoom)
 
 traversalPath = []
 
+roomTracker = set()
 
+
+def oppy(widget):
+    if widget == 'n':
+        return 's'
+    elif widget == 's':
+        return 'n'
+    elif widget == 'e':
+        return 'w'
+    elif widget == 'w':
+        return 'e'
+    else:
+        return None
+
+
+def traverseBFSway(rooms, start):
+    hold = []
+    hold.append([start])
+    visited = set()
+
+    while hold is not None: ##
+        path = hold.pop() ##
+        roomy = path[-1]
+
+        if roomy not in visited:
+            visited.add(roomy)
+
+            for exitway in rooms[roomy]:
+                if rooms[roomy][exitway] == '?':
+                    return path
+
+            for moreexits in rooms[roomy]:
+                nextroom = rooms[roomy][moreexits]
+                pathy = path.copy()
+                pathy.append(nexto)
+                q.enqueue(pathy) 
 
 # TRAVERSAL TEST
 visited_rooms = set()
